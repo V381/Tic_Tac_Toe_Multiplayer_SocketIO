@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <meta name="author" content="Pavle">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.css">
+    <link type="text/css" rel="stylesheet" href="./client/stylesheets/scss.css">
+</head>
+<body>
+
+
+<header>
+    <h1>Tic Tac Toe</h1>
+</header>
+
+<section class="container">
+
+    <button class="startGame">Start Game</button>
+    <button class="userWaiting"></button>
+
+    <table class="table">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+    </table>
+
+    <h1 class="winner"></h1>
+
+</section>
+<div id="tictactoe"></div>
+
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+<script>
+    var socket = io.connect();
+</script>
+
+<script src='./client/javascript/toe.js'></script>
+
+<script>
+
+
+    
+
+    var userWaitingH1 = document.querySelector('.userWaiting');
+
+    startButton.addEventListener('click', function(e) {
+        socket.emit('myClick');
+    });
+
+    socket.on('move', function(index){
+        var i = index.index;
+         if (xySwitch) {
+                 
+                    if (td[i].innerHTML === 'o') {
+                        return;
+                    }
+
+                    td[i].innerHTML = "x";
+                    xySwitch = false;
+                    td[i].style.color = "green";
+                    td[i].className = "x";
+                    /*
+                    if(winner(el, 'x')){
+                        drawArr = [];
+                        setTimeout(function(){
+                            clearAll(el);
+                        }, 2000)
+                        xySwitch = true;
+                    }
+                    */
+                    if (checkForWinner(td[i], 'x')) {
+                        drawArr = [];
+                        setTimeout(function () {
+                            clearAll();
+                        }, 2000);
+                        xySwitch = true;
+                    }
+                    checkForWinner(td[i], 'x');
+                    checkIfDraw(td[i]);
+                } else if (xySwitch === false) {
+
+                    if (td[i].innerHTML === 'x') {
+                        return;
+                    }
+
+                    td[i].innerHTML = "o";
+                    xySwitch = true;
+                    td[i].style.color = "red";
+                    td[i].className = "o";
+                    /*
+                    if(winner(el, 'o')){
+                        setTimeout(function(){
+                            clearAll(el);
+                        }, 2000)
+                        xySwitch = true;
+                        drawArr = [];
+                    }
+                    */
+                    if (checkForWinner(td[i], 'o')) {
+                        drawArr = [];
+                        setTimeout(function () {
+                            clearAll();
+                        }, 2000);
+                        xySwitch = true;
+                    }
+                    checkIfDraw(td[i]);
+                }
+    });
+
+    socket.on('myClick', function(data) {
+        startButton.click();
+    });
+
+    socket.on('waiting for user', function(msg) {
+        userWaitingH1.innerHTML = msg;
+    });
+
+    socket.on('user connected', function(msg){
+        userWaitingH1.innerHTML = msg + ' Press start game button';
+        oneVsOne();
+                clearAll();
+        setTimeout(function(){
+            userWaitingH1.innerHTML = '';
+        }, 3000);
+    })
+
+    socket.on('user disconnected', function(msg) {
+        userWaitingH1.innerHTML = msg;
+        setTimeout(function(){
+            userWaitingH1.innerHTML = 'Waiting for user';
+        }, 3000);
+    });
+
+</script>
+
+</body>
+</html>
