@@ -1,5 +1,5 @@
 {
-  "name": "Tic Tac Toe Multiplayer with SocketIO",
+  "name": "Tic_Tac_Toe_Multiplayer_with_SocketIO",
   "version": "1.0.0",
   "engines": {
     "node": "4.1.1"
