@@ -1,0 +1,54 @@
+
+
+@import "reset";
+
+$none : none;
+
+
+@include meyer-reset();
+
+header{
+  background-color: #414141;
+  width: 100%;
+  margin-bottom: 100px;
+  box-shadow: 4px 4px 4px black;
+  h1{
+    text-align: center;
+    padding: 20px;
+    color: white;
+    font-size: 2em;
+    &::first-letter{
+      color: red;
+    }
+
+  }
+}
+
+.container{
+  max-width: 100%;
+}
+
+table{
+  border-collapse: collapse;
+  display: table;
+  margin: 0 auto;
+  table-layout: fixed;
+    tr{
+      td{
+        word-wrap:break-word;
+        table-layout: fixed;
+        border: 2px solid #414141;
+        width: 200px;
+        height: 200px;
+        padding: 80px;
+        //border: 2px solid #4b93ff;
+        text-align: center;
+        box-sizing: border-box;
+        font-size: 2em;
+        box-shadow: 4px 4px 4px black;
+        max-width: 200px;
+
+        //box-shadow: 2px 2px 2px aqua;
+      }
+    }
+}
