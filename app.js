@@ -36,7 +36,7 @@ io.on('connection', function(socket){
 app.use(express.static(__dirname));
 
 app.set('port', process.env.PORT || 8080);
-http.listen(8080 || process.env.PORT, function () {
+http.listen(process.env.PORT, function () {
     console.log('Express server listening on port %d in %s mode', 8080, app.get('env'));
 })
 
