@@ -13,11 +13,11 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket){
    var srvSockets = io.sockets.sockets;
-   if(Object.keys(srvSockets).length === 1){
-    io.emit('waiting for user', 'Waiting for the user');
-    	}else{
-    io.emit('user connected', 'Users connected!');
-   }
+    if (Object.keys(srvSockets).length === 1) {
+        io.emit('waiting for user', 'Waiting for the user');
+    } else if(Object.keys(srvSockets).length === 2){
+        io.emit('user connected', 'Users connected!');
+    }
 
 	socket.on('disconnect', function(){
 	    io.emit('user disconnected', 'User Disconnected')
