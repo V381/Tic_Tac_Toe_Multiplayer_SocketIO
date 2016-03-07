@@ -86,6 +86,6 @@
     socket.on('user disconnected', function(msg) {
         userWaitingH1.innerHTML = msg;
         setTimeout(function(){
-            userWaitingH1.innerHTML = 'Waiting for second player to join';
+            userWaitingH1.innerHTML = 'User disconnected!';
         }, 3000);
     });
