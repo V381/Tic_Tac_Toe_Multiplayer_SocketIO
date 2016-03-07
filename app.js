@@ -14,7 +14,7 @@ app.get('/', function(req, res) {
 io.on('connection', function(socket){
    var srvSockets = io.sockets.sockets;
     if (Object.keys(srvSockets).length === 1) {
-        io.emit('waiting for user', 'Waiting for the user');
+        io.emit('waiting for user', 'Waiting for second player to join');
     } else if(Object.keys(srvSockets).length === 2){
         io.emit('user connected', 'Users connected!');
     }
